@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BehaviorSubject } from "rxjs";
 
-const API_SERVER = "http://localhost:8080";
-
 export const jwt = new BehaviorSubject(null);
 export const cart = new BehaviorSubject(null);
 
 export const getCart = () =>
-  fetch(`${API_SERVER}/cart`, {
+  fetch(`${process.env.REACT_APP_API_SERVER}/cart`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${jwt.value}`,
@@ -20,7 +18,7 @@ export const getCart = () =>
     });
 
 export const addToCart = (id) =>
-  fetch(`${API_SERVER}/cart`, {
+  fetch(`${process.env.REACT_APP_API_SERVER}/cart`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +32,7 @@ export const addToCart = (id) =>
     });
 
 export const clearCart = () =>
-  fetch(`${API_SERVER}/cart`, {
+  fetch(`${process.env.REACT_APP_API_SERVER}/cart`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +45,7 @@ export const clearCart = () =>
     });
 
 export const login = (username, password) =>
-  fetch(`${API_SERVER}/auth/login`, {
+  fetch(`${process.env.REACT_APP_API_SERVER}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
