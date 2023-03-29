@@ -4,7 +4,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: process.env.REACT_APP_PDP_PUBLIC_PATH,
   },
 
   resolve: {
@@ -44,10 +44,10 @@ module.exports = {
       name: "pdp",
       filename: "remoteEntry.js",
       remotes: {
-        home: "home@http://localhost:3000/remoteEntry.js",
-        pdp: "pdp@http://localhost:3001/remoteEntry.js",
-        cart: "cart@http://localhost:3002/remoteEntry.js",
-        addtocart: "addtocart@http://localhost:3003/remoteEntry.js",
+        home: process.env.REACT_APP_HOME_REMOTE_ENTRY_URL,
+        pdp: process.env.REACT_APP_PDP_REMOTE_ENTRY_URL,
+        cart: process.env.REACT_APP_CART_REMOTE_ENTRY_URL,
+        addtocart: process.env.REACT_APP_ADDTOCART_REMOTE_ENTRY_URL,
       },
       exposes: {
         "./PDPContent": "./src/PDPContent.jsx",
