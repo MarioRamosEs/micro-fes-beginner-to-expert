@@ -17,7 +17,7 @@ The visit the [home page](http://localhost:3000/).
 
 # Explicacion
 
-Existen 4 microsfrontends:
+Existen 4 microfrontends:
 - Home
     - MainLayout: con un header, footer y el contenido según la ruta
     - HomeContent: la pagina principal, donde se muestran los productos

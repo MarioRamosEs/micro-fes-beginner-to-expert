@@ -1,11 +1,12 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-const deps = require("./package.json").dependencies;
+console.log('process.env.REACT_APP_HOME_PUBLIC_PATH', process.env.REACT_APP_HOME_PUBLIC_PATH);
 
+const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: process.env.REACT_APP_PDP_PUBLIC_PATH,
+    publicPath: process.env.REACT_APP_HOME_PUBLIC_PATH,
   },
 
   resolve: {
@@ -13,7 +14,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 3001,
+    port: 3000,
     historyApiFallback: true,
   },
 
@@ -42,16 +43,20 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "pdp",
+      name: "home",
       filename: "remoteEntry.js",
       remotes: {
         home: process.env.REACT_APP_HOME_REMOTE_ENTRY_URL,
         pdp: process.env.REACT_APP_PDP_REMOTE_ENTRY_URL,
         cart: process.env.REACT_APP_CART_REMOTE_ENTRY_URL,
-        addtocart: process.env.REACT_APP_ADDTOCART_REMOTE_ENTRY_URL,
       },
       exposes: {
-        "./PDPContent": "./src/PDPContent.jsx",
+        "./Header": "./src/Header.jsx",
+        "./Footer": "./src/Footer.jsx",
+        "./HomeContent": "./src/HomeContent.jsx",
+        "./MainLayout": "./src/MainLayout.jsx",
+
+        "./products": "./src/products.js",
       },
       shared: {
         ...deps,

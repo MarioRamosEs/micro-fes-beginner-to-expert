@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { EnvironmentPlugin } = require('webpack');
 
 const deps = require("./package.json").dependencies;
 module.exports = {
@@ -69,5 +70,6 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),
+    new EnvironmentPlugin(['REACT_APP_API_SERVER']),
   ],
 };

@@ -41,7 +41,8 @@ export default function MiniCart() {
               {items.map((item) => (
                 <React.Fragment key={item.id}>
                   <div>{item.quantity}</div>
-                  <img src={item.image} alt={item.name} className="max-h-6" />
+                  {/* <img src={item.image} alt={item.name} className="max-h-6" /> */}
+                  <div className="max-h-6"></div>
                   <div>{item.name}</div>
                   <div className="text-right">
                     {currency.format(item.quantity * item.price)}

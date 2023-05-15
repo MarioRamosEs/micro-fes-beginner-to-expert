@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { EnvironmentPlugin } = require('webpack');
+
+console.log('process.env.REACT_APP_HOME_REMOTE_ENTRY_URL', process.env.REACT_APP_HOME_REMOTE_ENTRY_URL);
 
 const deps = require("./package.json").dependencies;
 module.exports = {
@@ -51,9 +54,10 @@ module.exports = {
       exposes: {
         "./Header": "./src/Header.jsx",
         "./Footer": "./src/Footer.jsx",
-        "./products": "./src/products.js",
         "./HomeContent": "./src/HomeContent.jsx",
         "./MainLayout": "./src/MainLayout.jsx",
+
+        "./products": "./src/products.js",
       },
       shared: {
         ...deps,
@@ -70,5 +74,6 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),
+    new EnvironmentPlugin(['REACT_APP_API_SERVER']),
   ],
 };

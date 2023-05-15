@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { BehaviorSubject } from "rxjs";
+import { apiUrl } from "./config";
 
+import { BehaviorSubject } from "rxjs";
 export const jwt = new BehaviorSubject(null);
+
 export const cart = new BehaviorSubject(null);
 
 export const getCart = () =>
-  fetch(`${process.env.REACT_APP_API_SERVER}/cart`, {
+  fetch(`${apiUrl}/cart`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${jwt.value}`,
@@ -18,7 +20,7 @@ export const getCart = () =>
     });
 
 export const addToCart = (id) =>
-  fetch(`${process.env.REACT_APP_API_SERVER}/cart`, {
+  fetch(`${apiUrl}/cart`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +34,7 @@ export const addToCart = (id) =>
     });
 
 export const clearCart = () =>
-  fetch(`${process.env.REACT_APP_API_SERVER}/cart`, {
+  fetch(`${apiUrl}/cart`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -44,8 +46,8 @@ export const clearCart = () =>
       getCart();
     });
 
-export const login = (username, password) =>
-  fetch(`${process.env.REACT_APP_API_SERVER}/auth/login`, {
+export const login = (username, password) => {
+  return fetch(`${apiUrl}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,6 +63,7 @@ export const login = (username, password) =>
       getCart();
       return data.access_token;
     });
+  };
 
 export function useLoggedIn() {
   const [loggedIn, setLoggedIn] = useState(!!jwt.value);

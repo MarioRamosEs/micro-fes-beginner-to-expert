@@ -1,12 +1,12 @@
 {
   "name": "home",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build": "env-cmd -f ../.env webpack --mode production",
     "build:dev": "env-cmd -f ../.env.local webpack --mode development",
     "build:start": "cd dist && PORT=3000 npx serve",
     "start": "env-cmd -f ../.env.local webpack serve --open --mode development",
-    "start:live": "webpack serve --open --mode development --live-reload --hot"
+    "start:live": "env-cmd -f ../.env.local webpack serve --open --mode development --live-reload --hot"
   },
   "license": "MIT",
   "author": {
@@ -30,7 +30,7 @@
     "style-loader": "^3.3.0",
     "tailwindcss": "^2.0.2",
     "webpack": "^5.57.1",
-    "webpack-cli": "^4.9.0",
+    "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
